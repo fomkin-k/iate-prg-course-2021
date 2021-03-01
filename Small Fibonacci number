@@ -1,0 +1,26 @@
+#include <cassert>
+#include <iostream>
+#include <vector>
+
+class Fibonacci {
+ public:
+  static int get(int n) {
+    assert(n >= 0);
+    int arr[40];
+    int m=n;
+    arr[0]=1;
+    arr[1]=1;
+    for(int i=2;i<m;i++){
+    arr[i]=arr[i-1]+arr[i-2];
+    }
+    n=arr[m-1];
+    return n;
+  }
+};
+
+int main(void) {
+  int n;
+  std::cin >> n;
+  std::cout << Fibonacci::get(n) << std::endl;
+  return 0;
+}
