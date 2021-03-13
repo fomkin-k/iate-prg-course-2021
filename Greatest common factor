@@ -1,0 +1,45 @@
+#include <cassert>
+#include <iostream>
+
+template <class Int>
+Int gcd(Int a, Int b) {
+    assert(a > 0 && b > 0);
+    // optimize this function
+
+    Int current_gcd = 1;
+    if (a == b) {
+        current_gcd = a;
+    }
+    else if (a > b && a % b == 0 ) {
+        current_gcd = b;
+    }
+    else if (b > a && b % a == 0) {
+        current_gcd = a;
+    }
+    else {
+        while ((a % b != 0) && (b % a != 0)) {
+            if (a > b&&a%b!=0) {
+                a = a % b;
+            }
+            else if (b > a&&b%a!=0) {
+                b = b % a;
+            }
+            if (a % b == 0) {
+                current_gcd = b;
+            }
+            else {
+                current_gcd = a;
+            }
+        }
+    }
+    return current_gcd;
+}
+
+
+
+int main(void) {
+    int a, b;
+    std::cin >> a >> b;
+    std::cout << gcd(a, b) << std::endl;
+    return 0;
+}
