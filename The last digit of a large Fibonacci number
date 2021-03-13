@@ -1,0 +1,25 @@
+#include <cassert>
+#include <iostream>
+
+class Fibonacci {
+ public:
+  static int get_last_digit(int n) {
+    assert(n >= 1);
+    int arr[1000000];
+    arr[0]=1;
+    arr[1]=1;
+    int m=n;
+    for(int i=2;i<m;i++){
+        arr[i]=(arr[i-1]+arr[i-2])%10;
+    }
+      n=arr[m-1];
+    return n;
+  }
+};
+
+int main(void) {
+  int n;
+  std::cin >> n;
+  std::cout << Fibonacci::get_last_digit(n) << std::endl;
+  return 0;
+}
