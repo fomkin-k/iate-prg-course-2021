@@ -1,0 +1,46 @@
+#include <cassert>
+#include <iostream>
+
+class Fibonacci {
+public:
+    static long long get_last_digit(long long n, long m) {
+        assert(n >= 1);
+        assert(m >= 2);
+        long mod[100000];
+        long l = 0;
+        int m1 = 0;
+        int m2 = 1;
+        int temp;
+        mod[0] = 0;
+        mod[1] = 1;
+        for (long i = 2; i < 6 * m; ++i) {
+            temp = (m1 + m2) % m;
+            m1 = m2;
+            m2 = temp;
+            if (m2==1 && m1 == 0) {
+                l = i - 1;
+                for (long i = 2; i < n % l + 1; ++i) {
+                    mod[i] = (mod[i - 1] + mod[i - 2]) % m;
+                }
+                break;
+            }
+        }
+        if (l == 0) {
+            for (long i = 2; i < n; ++i) {
+                mod[i] = (mod[i - 1] + mod[i - 2]) % m;
+            }
+            return mod[n - 1];
+        }
+        else {
+            return mod[n % l];
+        }
+    }
+};
+
+int main(void) {
+    long long n;
+    long m;
+    std::cin >> n >> m;
+    std::cout << Fibonacci::get_last_digit(n, m) << std::endl;
+    return 0;
+}
